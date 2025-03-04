@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/files/**")
-                .addResourceLocations("file:/tet_store/files/");
+                .addResourceLocations("file:/home/abzed/tet_store/files/");
     }
 }
 
