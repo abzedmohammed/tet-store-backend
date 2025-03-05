@@ -22,4 +22,9 @@ public class UserController {
     public StandardJsonResponse fetchUsers(){
         return userService.fetchUsers();
     }
+
+    @GetMapping("")
+    public StandardJsonResponse fetchUsers(@RequestParam("usrCid") String usrCid){
+        return userService.fetchUser(usrCid);
+    }
 }

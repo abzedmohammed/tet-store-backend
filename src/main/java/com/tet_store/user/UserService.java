@@ -3,9 +3,7 @@ package com.tet_store.user;
 import com.tet_store.utils.StandardJsonResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -29,12 +27,30 @@ public class UserService {
         return response;
     }
 
-    public StandardJsonResponse fetchUsers(){
+    public StandardJsonResponse fetchUsers() {
         StandardJsonResponse response = new StandardJsonResponse();
         try {
             List<User> users = userRepository.findAll();
             response.setSuccess(true);
             response.setData("result", users, response);
+        } catch (Exception e) {
+            response.setSuccess(false);
+            response.setMessage("message", e.getLocalizedMessage(), response);
+        }
+        return response;
+    }
+
+    public StandardJsonResponse fetchUser(String id) {
+        StandardJsonResponse response = new StandardJsonResponse();
+        try {
+            User user = userRepository.findByUsrCid(id);
+            if (user == null) {
+                response.setSuccess(false);
+                response.setMessage("message", "User not found", response);
+            } else {
+                response.setSuccess(true);
+            }
+            response.setData("result", user, response);
         } catch (Exception e) {
             response.setSuccess(false);
             response.setMessage("message", e.getLocalizedMessage(), response);

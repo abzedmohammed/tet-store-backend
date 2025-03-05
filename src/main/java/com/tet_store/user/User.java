@@ -1,5 +1,6 @@
 package com.tet_store.user;
 
+import com.tet_store.enums.UserTypes;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,10 +16,14 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID usrId;
+
     private String usrNames;
     private String usrEmail;
     private String usrPhone;
     private String usrAvatar;
     private String usrAddress;
     private String usrCid;
+
+    @Enumerated(EnumType.STRING)
+    private UserTypes usrType;
 }
